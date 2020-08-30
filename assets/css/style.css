@@ -1,0 +1,404 @@
+/*
+    DEMO STYLE
+*/
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+   
+}
+
+.bg-tosca{
+    color:#fff;
+    background-color: #12bbad;
+}
+
+.bg-tosca:hover{
+     color: #7386D5;
+    background: #fff;
+}
+
+
+.header-cst{
+    width: 100%;
+    height: 20px;
+}
+
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+/*
+.navbar {
+    padding: 15px 10px;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+*/
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+
+    display: flex;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 160px;
+    max-width: 160px;
+     color: #fff;
+  background: linear-gradient(-30deg, #4f70ce 0%, #12bbad 50%, #12bbad 100%);
+    transition: all 0.3s;
+    z-index: 3;
+}
+
+#sidebar.active {
+   margin-left: -160px; 
+}
+
+#sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
+    display: none;
+}
+
+#sidebar.active .sidebar-header strong {
+    display: block;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #12bbad;
+}
+
+#sidebar ul li a {
+    text-align: left;
+}
+
+#sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+#sidebar.active ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+#sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+@keyframes bounceIn {
+    0% {
+        transform-origin: 50% 100%;
+        transform: scale(0.1);
+        opacity: 0;
+    }
+
+    50% {
+        transform-origin: 50% 100%;
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform-origin: 50% 100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes wavingC {
+
+
+    0% {
+        transform-origin: 50% 100%;
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform-origin: 50% 100%;
+        transform: rotate(-25deg);
+    }
+
+    50% {
+        transform-origin: 50% 100%;
+        transform: rotate(25deg);
+    }
+
+    70% {
+        transform-origin: 50% 100%;
+        transform: rotate(-25deg);
+    }
+
+    90% {
+        transform-origin: 50% 100%;
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform-origin: 50% 100%;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes bounceInandwaving {
+    /*0% {
+        transform-origin: 50% 100%;
+        transform: scale(0.1);
+        opacity: 0;
+    }
+
+    25% {
+        transform-origin: 50% 100%;
+        transform: scale(1.2);
+        opacity: 1;
+    }*/
+
+    50% {
+        transform-origin: 50% 100%;
+        transform: scale(1);
+        transform: rotate(0deg);
+    }
+
+    60% {
+        transform-origin: 50% 100%;
+        transform: rotate(-25deg);
+    }
+
+    75% {
+        transform-origin: 50% 100%;
+        transform: rotate(25deg);
+    }
+
+    85% {
+        transform-origin: 50% 100%;
+        transform: rotate(-25deg);
+    }
+
+    95% {
+        transform-origin: 50% 100%;
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform-origin: 50% 100%;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -7px) rotate(-7deg); }
+  20% { transform: translate(-3px, 0px) rotate(7deg); }
+  30% { transform: translate(3px, 7px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(7deg); }
+  50% { transform: translate(-1px, 7px) rotate(-7deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-7deg); }
+  80% { transform: translate(-1px, -1px) rotate(7deg); }
+  90% { transform: translate(1px, 7px) rotate(0deg); }
+  100% { transform: translate(1px, -7px) rotate(-7deg); }
+}
+
+@keyframes waving {
+   
+
+    0% {
+        transform-origin: 50% 100%;
+        transform: scale(1);
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform-origin: 50% 100%;
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform-origin: 50% 100%;
+        transform: rotate(15deg);
+    }
+
+    75% {
+        transform-origin: 50% 100%;
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform-origin: 50% 100%;
+        transform: rotate(0deg);
+    }
+
+   
+}
+
+
+
+.bounceIn {
+    animation-duration: 0.5s;
+    animation-name: shake;
+   /* animation-iteration-count:infinite;*/
+    /* animation-duration: 1s;
+    animation-name: wavingC; */
+}
+
+.bouncecounting {
+    animation-duration: 1s;
+    animation-name: waving;
+    animation-iteration-count:infinite;
+    /* animation-duration: 1s;
+    animation-name: wavingC; */
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    padding: 20px 10px;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+}
+
+@font-face /*perintah untuk memanggil font eksternal*/
+  {
+    font-family: 'press_start'; /*memberikan nama bebas untuk font*/
+    src: url('../webfonts/PressStart2P-Regular.ttf');/*memanggil file font eksternalnya */
+  }
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebar {
+        min-width: 70px;
+        max-width: 70px;
+        text-align: center;
+        margin-left: -70px !important ;
+    }
+   
+    #sidebar.active {
+        margin-left: 0 !important;
+    }
+
+    #sidebar .sidebar-header h3, #sidebar .CTAs {
+        display: none;
+    }
+
+    #sidebar .sidebar-header strong {
+        display: block;
+    }
+
+    #sidebar ul li a {
+        padding: 20px 10px;
+    }
+
+    #sidebar ul li a span {
+        font-size: 0.85em;
+    }
+    #sidebar ul li a i {
+        margin-right:  0;
+        display: block;
+    }
+
+    #sidebar ul ul a {
+        padding: 10px !important;
+    }
+
+    #sidebar ul li a i {
+        font-size: 1.3em;
+    }
+    #sidebar {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+
+
+  
+
+
+}
+

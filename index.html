@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Timer</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery-3.3.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+    </head>
+    <body id= "ctr" >
+        <div class="container-fluid">
+        	<div class="col text-center mt-2 mb-2">
+                <img src="assets/logo_repsul.png" class="img-fluid logo" style="max-height: 150px">
+             </div>
+            <div class="col text-center pt-4 rounded" id="divtime">
+                <h1 style="font-size: 160px">
+                    <span id="timediv" style="font-family:'press_start',cursive;">00:00</span>
+                </h1>
+            </div>
+
+            <div style="height: 5px"></div>
+            
+            <div class="col">
+            	<i class="fas fa-volume-down fa-fw" style="margin-top:2px;position: absolute;"></i><input type="range" min="1" max="100" value="50" class="slider ml-4 mr-2" id="volumeslider"><i class="fas fa-volume-up fa-fw" style="margin-top:2px;position: absolute;"></i>
+            </div>
+           
+			<div class="input-group mb-2 mr-sm-2">
+				<button class="btn btn-sm btn-info m-1" id="15btn">15 Second</button>
+				<button class="btn btn-sm btn-info m-1" id="10btn">10 Second</button>
+				<button class="btn btn-sm btn-info m-1" id="5btn">5 Second</button>
+			</div>
+            <form class="form-inline ml-2">
+                <label class="mr-2">Time:&nbsp;</label>
+              <div class="input-group mb-2 mr-sm-2"> 
+                <input type="hidden" id="hour" placeholder="hour" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="hidden" id="minute" placeholder="minute" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="second" placeholder="second" style="width: 100px">
+            </div>
+
+
+        </form>
+
+        <!-- <form class="form-inline" id="hijau">
+            <label class="mr-2">Hijau:&nbsp;&nbsp;&nbsp;</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="hrh" placeholder="hour" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="minh" placeholder="minute" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="sech" placeholder="second" style="width: 100px">
+            </div>
+        </form>
+
+         <form class="form-inline" id="kuning">
+            <label class="mr-2">Kuning:</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="hrk" placeholder="hour" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="mink" placeholder="minute" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="seck" placeholder="second" style="width: 100px">
+            </div>
+        </form>
+
+         <form class="form-inline" id="merah">
+            <label class="mr-2">Merah:&nbsp;</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="hrm" placeholder="hour" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="minm" placeholder="minute" style="width: 100px">
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" id="secm" placeholder="second" style="width: 100px">
+            </div>
+        </form>
+		-->
+
+        <div class="input-group mb-2 mr-sm-2">
+            <button class="btn btn-success m-2" id="startbtn">Start</button>
+			<button class="btn btn-info m-2" id="resetbtn" >Reset</button>
+            <!-- <button class="btn btn-primary m-2" id="stopbtn">Stop</button>
+            <button class="btn btn-primary m-2" id="restartbtn">Resume</button> -->
+        </div>
+    </div>
+	<audio id="myAudio">
+  <source src="assets/audio/8-bit counting.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<audio id="myAudio2">
+  <source src="assets/audio/8-bit over.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+        <script type="text/javascript">
+        	var x = document.getElementById("myAudio"); 
+			var y = document.getElementById("myAudio2"); 
+			function fillZero(num) {
+				return num < 10 ? '0' + num : num;
+			};
+       var timerId;
+       var countresume;  
+       var countdown;
+       var countdownawal;
+       var timer = null; 
+       var hour = $("#hour").val() * 3600;
+       var minute= $("#minute").val() * 60;
+       var second= $("#second").val() * 1;
+
+       var hrh = $("#hrh").val() * 3600;
+       var minh = $("#minh").val() * 60;
+       var sech = $("#sech").val() * 1;
+
+       var hrk = $("#hrk").val() * 3600;
+       var mink = $("#mink").val() * 60;
+       var seck = $("#seck").val() * 1;
+
+       var hrm = $("#hrm").val() * 3600;
+       var minm = $("#minm").val() * 60;
+       var secm = $("#secm").val() * 1;
+
+       var convertime= parseInt(hour+minute+second);
+       //var convertime2= parseInt(hrh+minh+sech);
+       //var convertime3= parseInt(hrk+mink+seck);
+       //var convertime4= parseInt(hrm+minm+secm);
+	   var convertime2= parseInt(convertime/2);
+       var convertime3= parseInt(convertime/2);
+       var convertime4= parseInt(hrm+minm+secm);
+
+     
+
+
+    $('#startbtn').click(function(event) {
+	$(".logo").removeClass('bounceIn');
+	$("h1").removeClass('bounceIn');
+	
+		if ($(this).hasClass('btn-success')) {
+				$(this).text('Pause').addClass('btn-danger');
+				$(this).text('Pause').removeClass('btn-success');
+				
+				        if (timer !== null) return;
+							var hour = $("#hour").val() * 3600;
+						   var minute= $("#minute").val() * 60;
+						   var second= $("#second").val() * 1;
+
+						   var hrh = $("#hrh").val() * 3600;
+						   var minh = $("#minh").val() * 60;
+						   var sech = $("#sech").val() * 1;
+
+						   var hrk = $("#hrk").val() * 3600;
+						   var mink = $("#mink").val() * 60;
+						   var seck = $("#seck").val() * 1;
+
+						   var hrm = $("#hrm").val() * 3600;
+						   var minm = $("#minm").val() * 60;
+						   var secm = $("#secm").val() * 1;
+
+						   var convertime= parseInt(hour+minute+second);
+						   //var convertime2= parseInt(hrh+minh+sech);
+						   //var convertime3= parseInt(hrk+mink+seck);
+						   //var convertime4= parseInt(hrm+minm+secm);
+						   var convertime2= parseInt(convertime/2);
+						   var convertime3= parseInt(convertime/2);
+						   var convertime4= parseInt(hrm+minm+secm);
+
+						  countdown = convertime* 1000;
+						  countdownawal=countdown;
+
+						   var hijau = countdown - (convertime2* 1000);
+						   var kuning = hijau- (convertime3* 1000);
+						   var merah = kuning - (convertime4* 1000);
+						
+					  timerId = setInterval(function(){
+					  countdown -= 10;
+					  countresume=countdown;
+					  
+					  var hrs = Math.floor(countdown / (60 * 60 * 1000));
+					  var min = Math.floor((countdown - (hrs * 60 * 60 * 1000)) / (60 * 1000));
+					  var sec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000)) / 1000);  //correct
+					  var msec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000) - (sec * 1000)) / 10);  //correct
+
+					  if (countdown <= 0) {
+						y.play();
+						$(".logo").removeClass('bouncecounting');
+						$(".logo").addClass('bounceIn');
+						$("h1").addClass('bounceIn');
+						 clearInterval(timerId);
+						 //$("#timediv").html("00:00:00");
+						 $("#timediv").html("00:00");
+						  $('#startbtn').text('Start').addClass('btn-success');
+						  $('#startbtn').text('Start').removeClass('btn-danger');
+						
+						 
+					  } else {
+						 //$("#timediv").html(hrs + ":" + min + ":" + fillZero(sec) + ":" + fillZero(msec));
+						  $("#timediv").html(fillZero(sec) + ":" + fillZero(msec));
+						  x.play();
+
+					  }
+
+					  if (countdown > hijau && countdown <= countdown) {
+						// $("#divtime").css("background-color", "green");
+						$("h1").removeClass('bounceIn');
+						$("#divtime").removeClass('bg-danger');
+						$(".logo").addClass('bouncecounting');
+						$("#divtime").addClass('bg-success text-white');
+					  }
+
+					  if (countdown > kuning && countdown <= hijau) {
+						// $("#divtime").css("background-color", "yellow");
+						$("h1").removeClass('bounceIn');
+						$("#divtime").removeClass('bg-success');
+						$("#divtime").addClass('bg-warning text-white');
+					  }
+
+					  if (countdown <= kuning) {
+						// $("#divtime").css("background-color", "red");
+						$("#divtime").removeClass('bg-warning');
+						$("#divtime").addClass('bg-danger text-white');
+					  }
+
+					}, 10); //1000ms. = 1sec.
+				
+		} else if ($(this).hasClass('btn-danger')) {
+			$(this).text('Resume').addClass('btn-primary');
+			$(this).text('Resume').removeClass('btn-danger');
+			$(".logo").removeClass('bouncecounting');
+			 countresume;
+			 clearInterval(timerId);
+			
+			 timer = null;
+			$("#divtime").removeClass('bg-success bg-warning bg-danger text-white');
+			// $("#divtime").css("background-color", "white");
+
+		}else if ($(this).hasClass('btn-primary')) {
+			$(this).text('Pause').addClass('btn-danger');
+			$(this).text('Pause').removeClass('btn-primary');
+			$(".logo").addClass('bouncecounting');
+				var hour = $("#hour").val() * 3600;
+			   var minute= $("#minute").val() * 60;
+			   var second= $("#second").val() * 1;
+
+			   var hrh = $("#hrh").val() * 3600;
+			   var minh = $("#minh").val() * 60;
+			   var sech = $("#sech").val() * 1;
+
+			   var hrk = $("#hrk").val() * 3600;
+			   var mink = $("#mink").val() * 60;
+			   var seck = $("#seck").val() * 1;
+
+			   var hrm = $("#hrm").val() * 3600;
+			   var minm = $("#minm").val() * 60;
+			   var secm = $("#secm").val() * 1;
+
+			   var convertime= parseInt(hour+minute+second);
+			   //var convertime2= parseInt(hrh+minh+sech);
+			   //var convertime3= parseInt(hrk+mink+seck);
+			   //var convertime4= parseInt(hrm+minm+secm);
+			   var convertime2= parseInt(convertime/2);
+			   var convertime3= parseInt(convertime/2);
+			   var convertime4= parseInt(hrm+minm+secm);
+
+			   countdown = countresume;
+
+			   var hijau = countdownawal - (convertime2* 1000);
+			   var kuning = hijau- (convertime3* 1000);
+			   var merah = kuning - (convertime4* 1000);
+
+			timerId = setInterval(function(){
+		  countdown -= 10;
+		  countresume=countdown;
+		  var hrs = Math.floor(countdown / (60 * 60 * 1000));
+		  var min = Math.floor((countdown - (hrs * 60 * 60 * 1000)) / (60 * 1000));
+		  var sec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000)) / 1000);  //correct
+		  var msec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000) - (sec * 1000)) / 10);  //correct
+
+
+
+		  if (countdown <= 0) {
+
+			 clearInterval(timerId);
+			 //$("#timediv").html("00:00:00");
+			 $("#timediv").html("00:00");
+			   $('#startbtn').text('Start').addClass('btn-success');
+			   $('#startbtn').text('Start').removeClass('btn-danger');
+			   $(".logo").removeClass('bouncecounting');
+			   $(".logo").addClass('bounceIn');
+			   $("h1").addClass('bounceIn');
+			   x.pause();
+			   x.currentTime = 0;
+			   y.play();
+			 
+		  } else {
+			 //$("#timediv").html(hrs + ":" + min + ":" + fillZero(sec) + ":" + fillZero(msec));
+			  $("#timediv").html(fillZero(sec) + ":" + fillZero(msec));
+			  x.play();
+		  }
+
+					  if (countdown > hijau && countdown <= countdown) {
+						// $("#divtime").css("background-color", "green");
+						$("h1").removeClass('bounceIn');
+						$("#divtime").removeClass('bg-danger');
+						$("#divtime").addClass('bg-success text-white');
+					  }
+
+					  if (countdown > kuning && countdown <= hijau) {
+						// $("#divtime").css("background-color", "yellow");
+						$("h1").removeClass('bounceIn');
+						$("#divtime").removeClass('bg-success');
+						$("#divtime").addClass('bg-warning text-white');
+					  }
+
+					  if (countdown <= kuning) {
+						// $("#divtime").css("background-color", "red");
+						$("#divtime").removeClass('bg-warning');
+						$("#divtime").addClass('bg-danger text-white');
+					  }
+
+		}, 10); //1000ms. = 1sec.
+		}
+	
+	//$(this).text(function (_, text) {
+      //  return text === 'Pause' ? 'Start' : 'Pause';
+    //}).toggleClass('btn-danger');
+
+
+});
+
+$('#stopbtn').click(function(event) {
+    console.log(countdown);
+    countresume;
+     clearInterval(timerId);
+    
+     timer = null;
+    $("#divtime").removeClass('bg-success bg-warning bg-danger text-white');
+        // $("#divtime").css("background-color", "white");
+});
+
+$('#restartbtn').click(function(event) {
+     var hour = $("#hour").val() * 3600;
+       var minute= $("#minute").val() * 60;
+       var second= $("#second").val() * 1;
+
+       var hrh = $("#hrh").val() * 3600;
+       var minh = $("#minh").val() * 60;
+       var sech = $("#sech").val() * 1;
+
+       var hrk = $("#hrk").val() * 3600;
+       var mink = $("#mink").val() * 60;
+       var seck = $("#seck").val() * 1;
+
+       var hrm = $("#hrm").val() * 3600;
+       var minm = $("#minm").val() * 60;
+       var secm = $("#secm").val() * 1;
+
+       var convertime= parseInt(hour+minute+second);
+       var convertime2= parseInt(hrh+minh+sech);
+       var convertime3= parseInt(hrk+mink+seck);
+       var convertime4= parseInt(hrm+minm+secm);
+
+       countdown = countresume;
+
+       var hijau = countdownawal - (convertime2* 1000);
+       var kuning = hijau- (convertime3* 1000);
+       var merah = kuning - (convertime4* 1000);
+
+    timerId = setInterval(function(){
+  countdown -= 10;
+  countresume=countdown;
+  var hrs = Math.floor(countdown / (60 * 60 * 1000));
+  var min = Math.floor((countdown - (hrs * 60 * 60 * 1000)) / (60 * 1000));
+  var sec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000)) / 1000);  //correct
+  var msec = Math.floor((countdown - (hrs * 60 * 60 * 1000) - (min * 60 * 1000) - (sec * 1000)) / 10);  //correct
+
+
+
+  if (countdown <= 0) {
+
+     clearInterval(timerId);
+     $(".logo").removeClass('bouncecounting');
+	 $(".logo").addClass('bounceIn');
+     //$("#timediv").html("00:00:00");
+	 $("#timediv").html("00:00");
+     
+  } else {
+     //$("#timediv").html(hrs + ":" + min + ":" + fillZero(sec) + ":" + fillZero(msec));
+	  $("#timediv").html(fillZero(sec) + ":" + fillZero(msec));
+  }
+
+  					if (countdown > hijau && countdown <= countdown) {
+						// $("#divtime").css("background-color", "green");
+						$("#divtime").removeClass('bg-danger');
+						$("#divtime").addClass('bg-success text-white');
+					}
+
+					if (countdown > kuning && countdown <= hijau) {
+						// $("#divtime").css("background-color", "yellow");
+						$("#divtime").removeClass('bg-success');
+						$("#divtime").addClass('bg-warning text-white');
+					}
+
+					if (countdown <= kuning) {
+						// $("#divtime").css("background-color", "red");
+						$("#divtime").removeClass('bg-warning');
+						$("#divtime").addClass('bg-danger text-white');
+					}
+
+}, 10); //1000ms. = 1sec.
+
+});
+
+$('#resetbtn').click(function(event) {
+	$(".logo").removeClass('bounceIn bouncecounting');
+	$("h1").removeClass('bounceIn');
+	$('#second').val('');
+    clearInterval(timerId);		
+	timer = null;
+	$('#startbtn').text('Start').addClass('btn-success');
+	$('#startbtn').text('Start').removeClass('btn-danger');
+	$('#startbtn').text('Start').removeClass('btn-primary');
+	$("#divtime").removeClass('bg-success bg-warning bg-danger text-white');
+	// $("#divtime").css("background-color", "white");
+	$("#timediv").html("00:00");
+	
+
+});
+
+$('#15btn').click(function(event) { 
+	$('#second').val('15');
+	$("#timediv").html("15:00");
+});
+
+$('#10btn').click(function(event) { 
+	$('#second').val('10');
+	$("#timediv").html("10:00");
+});
+
+$('#5btn').click(function(event) { 
+	$('#second').val('5');
+	$("#timediv").html("05:00");
+});
+
+	volumeslider = document.getElementById("volumeslider");
+	volumeslider.addEventListener("mousemove", setvolume);
+	function setvolume(){
+	    x.volume = volumeslider.value / 100;
+	    y.volume = volumeslider.value / 100;
+    }
+	
+
+	
+        </script>
+
+
+    </body>
+</html>
